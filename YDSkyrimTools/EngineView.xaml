@@ -1,0 +1,149 @@
+﻿<Window x:Class="YDSkyrimTools.EngineView"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:YDSkyrimTools"
+        mc:Ignorable="d"
+        Title="总控面板-点击左侧圆形图标启用停用引擎" Height="330" Width="1000" Background="#FF585858" Loaded="Window_Loaded" Closing="Window_Closing" WindowStartupLocation="CenterScreen">
+    <Grid>
+        <StackPanel Orientation="Horizontal" VerticalAlignment="Top" Margin="0 8 0 0">
+            <Grid  Width="80" Height="80" Margin="5 0 5 0" PreviewMouseDown="SetPhraseEngineUsing" >
+                <Image Source="/A1_10.png" Stretch="Fill" Opacity="1" Name="PhraseEngine"/>
+                <Label VerticalAlignment="Center" HorizontalContentAlignment="Center" Foreground="#FFFF0800" FontWeight="Bold">
+                    词组引擎1
+                </Label>
+            </Grid>
+
+            <Grid  Width="80" Height="80" Margin="5 0 5 0" PreviewMouseDown="SetCodeParsingEngineUsing">
+                <Image Source="/L2_09.png" Stretch="Fill" Name="CodeParsingEngine" Opacity="1"/>
+                <Label VerticalAlignment="Center" HorizontalContentAlignment="Center" Foreground="#FFFF0800" FontWeight="Bold" FontSize="10">
+                   代码处理引擎2
+                </Label>
+            </Grid>
+
+            <Grid  Width="80" Height="80" Margin="5 0 5 0" PreviewMouseDown="SetConjunctionEngineUsing">
+                <Image Source="/A1_21.png" Stretch="Fill" Name="ConjunctionEngine" Opacity="1"/>
+                <Label VerticalAlignment="Center" HorizontalContentAlignment="Center" Foreground="#FFFF0800" FontWeight="Bold">
+                    连词引擎3
+                </Label>
+            </Grid>
+
+            <StackPanel Orientation="Vertical" HorizontalAlignment="Center" VerticalAlignment="Bottom" >
+                <Grid  Width="80" Height="80" Margin="5 5 5 5" PreviewMouseDown="SetBaiDuYunApiUsing">
+                    <Ellipse Fill="#FF3B80FF" Name="BaiDuYunApi" Opacity="1"></Ellipse>
+                    <Label VerticalAlignment="Center" HorizontalContentAlignment="Center" Foreground="White" FontWeight="Bold">
+                        百度云翻译4
+                    </Label>
+                </Grid>
+
+                <Grid  Width="80" Height="80" Margin="5 5 5 5" PreviewMouseDown= "SetYouDaoYunApiUsing">
+                    <Ellipse Fill="#FF00C608" Name="YouDaoYunApi" Opacity="1"></Ellipse>
+                    <Label VerticalAlignment="Center" HorizontalContentAlignment="Center" Foreground="White" FontWeight="Bold">
+                        有道云..4-1
+                    </Label>
+                </Grid>
+
+                <Grid  Width="80" Height="80" Margin="5 5 5 5" PreviewMouseDown="SetGoogleYunApiUsing">
+                    <Image Source="/M1_06.png" Stretch="Fill" Name="GoogleYunApi" Opacity="1"/>
+                    <Label VerticalAlignment="Center" HorizontalContentAlignment="Center" Foreground="Red" FontWeight="Bold">
+                        谷歌云..4-2
+                    </Label>
+                </Grid>
+            </StackPanel>
+
+
+            <Grid  Width="120" Height="120" Margin="5 0 5 0" PreviewMouseDown="SetDivCacheEngineUsing">
+                <Image Source="/M1_09.png" Stretch="Fill" Name="DivCacheEngine" Opacity="1"/>
+                <Label VerticalAlignment="Center" HorizontalContentAlignment="Center" Foreground="#FFFF0800" FontWeight="Bold">
+                    自定义引擎5
+                </Label>
+            </Grid>
+
+
+            <Grid Margin="30 0 0 0">
+                <StackPanel Orientation="Vertical" VerticalAlignment="Center">
+                    <StackPanel Orientation="Horizontal" Margin="0 0 0 5">
+                        <Label Foreground="White">
+                            当前状态:
+                        </Label>
+
+                        <TextBox Name="EngineState" Height="30" Width="385" IsReadOnly="True" AcceptsReturn="True" TextWrapping="Wrap" >
+                           
+                        </TextBox>
+                    </StackPanel>
+                    
+                    <StackPanel Orientation="Horizontal">
+                        <Label Foreground="White">
+                           清理翻译缓存:
+                        </Label>
+
+                        <Button Click="ClearDBTranslateCache" Padding="5 0 5 0" Margin="5">
+                            执行
+                        </Button>
+
+                        <Label Foreground="White">
+                           搜索缓存:
+                        </Label>
+                        <TextBox Width="100" Margin="5" Name="CacheText">
+                        </TextBox>
+
+                        <Button Click="SearchDBCache" Padding="5 0 5 0" Margin="5">
+                            搜索
+                        </Button>
+                        <Button Click="DeleteSearchDBCache" Padding="5 0 5 0" Margin="5">
+                            删除搜索的缓存
+                        </Button>
+                    </StackPanel>
+
+                    <StackPanel Orientation="Horizontal">
+                        <Label Foreground="White">
+                            调教自定义引擎:
+                        </Label>
+                        <Label Foreground="White">
+                            From
+                        </Label>
+                        <TextBox Width="50" Name="Text">
+                        </TextBox>
+                        <Label Foreground="White">
+                           To
+                        </Label>
+                        <TextBox Width="50" Name="Result">
+                        </TextBox>
+                        <Button Click="AddCacheToTranslate" Padding="5 0 5 0">
+                            追加字段
+                        </Button>
+
+                        <Button Click="SetEngineInFo" Padding="5 0 5 0" Margin="5 0 0 0">
+                            详情调整
+                        </Button>
+                    </StackPanel>
+
+                    <ListBox Name="TranslateCaches" Height="100" Margin="5">
+                    </ListBox>
+
+                    <Button Click="DeleteDivTranslateCard" Padding="5 0 5 0" Margin="5 0 5 0">
+                       删除选中项
+                    </Button>
+
+                    <Label Foreground="#FF00E634">
+                        F6挂起交互式翻译 F7恢复交互式翻译  F8翻译选中字段
+                    </Label>
+                   
+
+                    <Label Foreground="Red">
+                        点击左侧头像启用或关闭指定引擎
+                    </Label>
+
+                </StackPanel>
+            </Grid>
+
+
+        </StackPanel>
+
+       
+      
+        
+
+    </Grid>
+</Window>

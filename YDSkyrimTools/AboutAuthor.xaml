@@ -1,0 +1,42 @@
+﻿<Window x:Class="YDSkyrimTools.AboutAuthor"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:YDSkyrimTools"
+        mc:Ignorable="d"
+        Title="关于作者" Height="480" Width="500" WindowStartupLocation="CenterScreen" Closing="Window_Closing" Loaded="Window_Loaded">
+    <Grid>
+        <StackPanel Orientation="Vertical" VerticalAlignment="Center" HorizontalAlignment="Center">
+
+          
+
+            <StackPanel Orientation="Horizontal" Margin="0 15 0 5">
+                <Label Background="#FF00A836" Foreground="White" >
+                    主程序: 约定
+                </Label>
+                <Label>
+                    QQ 525084464
+                </Label>
+            </StackPanel>
+            
+            <StackPanel Orientation="Horizontal"   Margin="0 15 0 5">
+                <Label Background="#FF00A836" Foreground="White" >
+                    开发团队: 泰姆瑞尔MOD组 
+                </Label>
+                <Label>
+                    QQ群 885312680
+                </Label>
+            </StackPanel>
+
+
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="0 5 0 5">
+                <Label Name="CurrentVersion">
+                    SkyrimTools Version  1.1.3 Beta
+                </Label>
+            </StackPanel>
+
+        </StackPanel>
+
+    </Grid>
+</Window>

@@ -1,0 +1,688 @@
+﻿<Window x:Class="YDSkyrimTools.YDGUI"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:svgc="http://sharpvectors.codeplex.com/svgc/"
+        xmlns:local="clr-namespace:YDSkyrimTools"
+        mc:Ignorable="d"
+        Title="YDGUI" Height="720" Width="800" MinWidth="630" Loaded="Window_Loaded" SizeChanged="WinChangeSize" WindowStartupLocation="CenterScreen" LocationChanged="Window_LocationChanged" Closed="Window_Closed">
+
+    <Window.Style>
+        <Style TargetType="Window">
+            <Setter Property="Background" Value="Transparent" />
+            <Setter Property="WindowStyle" Value="None" />
+            <Setter Property="ResizeMode" Value="CanResize" />
+            <Setter Property="AllowsTransparency" Value="True" />
+            <Setter Property="WindowChrome.WindowChrome">
+                <Setter.Value>
+                    <WindowChrome CaptionHeight="0" ResizeBorderThickness="10"/>
+                </Setter.Value>
+            </Setter>
+        </Style>
+
+        <!--进度条样式-->
+       
+    </Window.Style>
+
+    <Border BorderThickness="1" CornerRadius="5" SnapsToDevicePixels="True" Margin="0 0 0 0" >
+
+        <Border.Effect>
+            <DropShadowEffect  BlurRadius="10" Direction="1" ShadowDepth="0.7" Color="#FFF77FAC" Opacity="0.8" />
+        </Border.Effect>
+
+        <Border BorderThickness="0"  Margin="2" CornerRadius="5" SnapsToDevicePixels="True" Background="#FFF77FAC">
+            <Grid>
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="35"/>
+                        <RowDefinition Height="1*"/>
+                        <RowDefinition Height="8"/>
+                    </Grid.RowDefinitions>
+
+                    <Grid Grid.Row="0" MouseLeftButtonDown="WinHead_MouseLeftButtonDown">
+                        <Label Foreground="White" VerticalContentAlignment="Center"  FontSize="12.5" Margin="8 0 5 0" Background="#FFF77FAC" FontFamily="Microsoft YaHei UI">
+                            YDSkyrimTools Gui 2.4.1
+                        </Label>
+
+                        <Grid Margin="0 0 0 0" HorizontalAlignment="Right">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="1"/>
+                                <ColumnDefinition Width="25"/>
+                                <ColumnDefinition Width="0"/>
+                                <ColumnDefinition Width="25"/>
+                                <ColumnDefinition Width="0"/>
+                                <ColumnDefinition Width="25"/>
+                                <ColumnDefinition Width="5"/>
+                            </Grid.ColumnDefinitions>
+
+                            <Border CornerRadius="5"  Grid.Column="1" Height="25" Width="25"  MouseDown="MinThis" Background="#FFF77FAC"  MouseEnter="RMouserEffectByEnter" MouseLeave="RMouserEffectByLeave" Cursor="Hand">
+                                <Image Name="TMin" Stretch="UniformToFill"  Width="16" Height="2" Opacity="0.8">
+                                </Image>
+                            </Border>
+
+                            <Border CornerRadius="5"  Grid.Column="3" Height="25" Width="25"  MouseDown="MaxThis" Background="#FFF77FAC"  MouseEnter="RMouserEffectByEnter" MouseLeave="RMouserEffectByLeave" Cursor="Hand">
+                                <Image Name="TChangeWin" Stretch="UniformToFill"  Width="14" Height="13" Opacity="0.8">
+                                </Image>
+                            </Border>
+
+                            <Border CornerRadius="5"  Grid.Column="5" Height="25" Width="25"  MouseDown="ExitThis" Background="#FFF77FAC"  MouseEnter="RMouserEffectByEnter" MouseLeave="RMouserEffectByLeave" Cursor="Hand">
+                                <Image Name="TClose" Stretch="UniformToFill"  Width="14" Height="13" Opacity="0.8">
+                                </Image>
+                            </Border>
+
+                        </Grid>
+                    </Grid>
+
+                    <Grid Grid.Row="1" Panel.ZIndex="1" Background="White">
+
+                    </Grid>
+
+                    <Grid Grid.Row="1" Panel.ZIndex="5" Background="White" Opacity="1">
+                    </Grid>
+
+                    <Grid Grid.Row="1" Panel.ZIndex="6">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="50"/>
+                            <ColumnDefinition Width="1*"/>
+                        </Grid.ColumnDefinitions>
+
+                        <!--NavStart-->
+                        <Grid Background="#FF3C3C3C">
+
+                            <StackPanel Orientation="Vertical" HorizontalAlignment="Center" Name="Nav" Margin="0 20 0 0">
+                                <Grid Background="#FF3C3C3C" Width="50" Height="50" Margin="0 0 0 1" PreviewMouseDown="MainNavSelect" Tag="TransView" Name="Effect1">
+                                    <svgc:SvgViewbox Name="TransICO" Stretch="UniformToFill"   Margin="3 0 3 0" Width="25" Panel.ZIndex="900" Height="25" ToolTip="翻译核心视图"  Cursor="Hand" Opacity="1"/>
+                                </Grid>
+
+                                <Grid Background="#FF3C3C3C" Width="50" Height="50" Margin="0 0 0 1" PreviewMouseDown="MainNavSelect"  Tag="MoView" Name="Effect2">
+                                    <svgc:SvgViewbox Name="MO2ICO" Stretch="UniformToFill"   Margin="3 0 3 0" Width="25" Panel.ZIndex="900" Height="25" ToolTip="翻译核心视图"  Cursor="Hand" Opacity="1"/>
+                                </Grid>
+
+                                <Grid Background="#FF3C3C3C" Width="50" Height="50" Margin="0 0 0 1" PreviewMouseDown="MainNavSelect"  Tag="SettingView" Name="Effect3">
+                                    <svgc:SvgViewbox Name="SettingICO" Stretch="UniformToFill"   Margin="3 0 3 0" Width="25" Panel.ZIndex="900" Height="25" ToolTip="设置视图"  Cursor="Hand" Opacity="1"/>
+                                </Grid>
+                                
+                            </StackPanel>
+
+                        </Grid>
+
+
+
+                        <Grid Grid.Column="1">
+                            <Image  Source="/backgroundpic.jpg" Stretch="Uniform" Opacity="0.65" HorizontalAlignment="Right" Height="380" VerticalAlignment="Bottom" Panel.ZIndex="0" IsHitTestVisible="False"/>
+
+                            <Grid Visibility="Hidden" Name="TranslateCoreView">
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="50"/>
+                                    <RowDefinition Height="65"/>
+                                    <RowDefinition Height="50"/>
+                                    <RowDefinition Height="1*"/>
+                                    <RowDefinition Height="30"/>
+                                </Grid.RowDefinitions>
+
+                                <Label VerticalAlignment="Center" FontSize="20" FontFamily="Microsoft YaHei UI" Foreground="#FF636363" Margin="20 0 0 0">
+                                    翻译核心
+                                </Label>
+
+                                <StackPanel Orientation="Horizontal" Grid.Row="0" HorizontalAlignment="Right" Margin="0 0 0 0" Background="#FFFFE8E8">
+
+                                    <Label VerticalAlignment="Center" FontSize="13" FontFamily="Microsoft YaHei UI" Foreground="#FF82AB" Margin="20 0 0 0" FontWeight="Bold">
+                                        引擎控制
+                                    </Label>
+                                    <svgc:SvgViewbox Name="LanguagesEngine" Stretch="UniformToFill"   Margin="10 0 3 0" Width="19" Panel.ZIndex="900" Height="19"  ToolTip="本地词组引擎"  Cursor="Hand" MouseDown="SelectEngine" Opacity="1"/>
+                                    <Label VerticalAlignment="Center" Margin="-2 0 -2 0" Foreground="#FF82AB" FontWeight="Bold" >
+                                        >
+                                    </Label>
+                                    <svgc:SvgViewbox Name="CodeEngine" Stretch="UniformToFill"   Margin="3 0 3 0" Width="20" Panel.ZIndex="900" Height="18" ToolTip="代码识别引擎"  Cursor="Hand" MouseDown="SelectEngine" Opacity="1"/>
+                                    <Label VerticalAlignment="Center" Margin="-2 0 -2 0" Foreground="#FF82AB" FontWeight="Bold" >
+                                        >
+                                    </Label>
+                                    <svgc:SvgViewbox Name="ConjunctionEngine" Stretch="UniformToFill"  Margin="3 0 3 0" Width="17" Panel.ZIndex="900" Height="18" ToolTip="本地连词引擎"  Cursor="Hand" MouseDown="SelectEngine" Opacity="1"/>
+                                    <Label VerticalAlignment="Center" Margin="-2 0 -2 0" Foreground="#FF82AB" FontWeight="Bold" >
+                                        >
+                                    </Label>
+                                    <svgc:SvgViewbox Name="BaiduEngine" Stretch="UniformToFill"  Margin="3 0 3 0" Width="17" Panel.ZIndex="900" Height="18" ToolTip="百度云翻译"  Cursor="Hand" MouseDown="SelectEngine" Opacity="1"/>
+                                    <Label VerticalAlignment="Center" Margin="-2 0 -2 0" Foreground="#FF82AB" FontWeight="Bold" >
+                                        >
+                                    </Label>
+                                    <svgc:SvgViewbox Name="YouDaoEngine" Stretch="UniformToFill"   Margin="3 0 3 0" Width="17" Panel.ZIndex="900" Height="18" ToolTip="有道云翻译"  Cursor="Hand" MouseDown="SelectEngine" Opacity="1"/>
+                                    <Label VerticalAlignment="Center" Margin="-2 0 -2 0" Foreground="#FF82AB" FontWeight="Bold" >
+                                        >
+                                    </Label>
+                                    <svgc:SvgViewbox Name="GoogleEngine" Stretch="UniformToFill"  Margin="3 0 3 0" Width="17" Panel.ZIndex="900" Height="18" ToolTip="谷歌云翻译"  Cursor="Hand" MouseDown="SelectEngine" Opacity="1"/>
+                                    <Label VerticalAlignment="Center" Margin="-2 0 -2 0" Foreground="#FF82AB" FontWeight="Bold">
+                                        >
+                                    </Label>
+                                    <svgc:SvgViewbox Name="DivEngine" Stretch="UniformToFill"   Margin="3 0 3 0" Width="21" Panel.ZIndex="900" Height="18.2" ToolTip="自定义引擎"  Cursor="Hand" MouseDown="SelectEngine" Opacity="1"/>
+
+                                    <Border  CornerRadius="5" Background="#FF82AB" Width="80" Height="27" Margin="20 0 20 0">
+                                        <Label Foreground="White" HorizontalAlignment="Center" VerticalAlignment="Center" Cursor="Hand" ToolTip="删除翻译缓存(已通过云翻译的词组将会重新翻译!)(只影响云引擎!)" MouseDown="ClearTransCache">
+                                            清理云缓存
+                                        </Label>
+                                    </Border>
+                                </StackPanel>
+
+                                <Grid Grid.Row="1" Background="#FFF4F4F4">
+                                    <StackPanel Orientation="Horizontal" VerticalAlignment="Center" Margin="0 5 0 0">
+                                        <Label Margin="20 0 0 0" FontFamily="Microsoft YaHei UI" FontWeight="Bold" FontSize="13" Foreground="#FFF789B2">
+                                            文件名:
+                                        </Label>
+
+                                        <Label Margin="0 0 0 0" FontFamily="Microsoft YaHei UI" FontWeight="Bold" FontSize="13"   Foreground="#FF585858" Name="CurrentFileName">
+
+                                        </Label>
+
+                                        <Label Margin="1 0 0 0" FontFamily="Microsoft YaHei UI" FontWeight="Bold" FontSize="13"  Foreground="#FFF789B2">
+                                            翻译类型
+                                        </Label>
+
+                                        <ComboBox Name="TranslateType" VerticalContentAlignment="Center" Style="{StaticResource WpfComboBoxStyle}" Width="155" Margin="0 -5 0 0" Panel.ZIndex="999" SelectionChanged="TransChange">
+                                        </ComboBox>
+
+                                        <Border  CornerRadius="5" Background="#FFF789B2" Width="80" Height="35" Margin="20 -5 20 0" Name="StartTransBtn">
+                                            <Label Foreground="White" HorizontalAlignment="Center" VerticalAlignment="Center" Cursor="Hand" ToolTip="开始执行翻译线程" MouseDown="AutoStartTranslate">
+                                                开始翻译
+                                            </Label>
+                                        </Border>
+
+                                        <Border  CornerRadius="5" Background="#FFF789B2" Width="35" Height="35" Margin="20 -5 20 0" PreviewMouseDown="ChangeTransProcessState" Cursor="Hand" Name="ProcessStateBackGround">
+                                            <svgc:SvgViewbox Name="AutoKeep" Stretch="Fill"   Margin="3 0 3 0" Width="15" Panel.ZIndex="900" Height="15" ToolTip="继续" HorizontalAlignment="Center" VerticalAlignment="Center" Cursor="Hand" Opacity="1"/>
+                                        </Border>
+
+                                        <Border  CornerRadius="5" Background="#FFF789B2" Width="35" Height="35" Margin="-10 -5 20 0" PreviewMouseDown="KillTransProcessTrd" Cursor="Hand">
+                                            <svgc:SvgViewbox Name="KillTransThread" Stretch="Fill"   Margin="3 0 3 0" Width="20" Panel.ZIndex="900" Height="20" ToolTip="终止翻译" HorizontalAlignment="Center" VerticalAlignment="Center" Cursor="Hand" Opacity="1"/>
+                                        </Border>
+                                    </StackPanel>
+                                </Grid>
+
+                                <Grid Grid.Row="2">
+                                    <StackPanel Orientation="Horizontal" Margin="20 0 20 0">
+                                        <Label VerticalAlignment="Center" FontFamily="Microsoft YaHei UI"  Foreground="#FF636363"  FontSize="13">
+                                            完成度
+                                        </Label>
+                                        <ProgressBar  Width="350" BorderBrush="{x:Null}" BorderThickness="0"  Background="#FFFF93C9"  Value="0" Maximum="100" Minimum="0" Height="20" Name="TranslatePercent">
+                                        </ProgressBar>
+                                    </StackPanel>
+                                </Grid>
+
+                                <Grid Grid.Row="3" Margin="20 0 20 0">
+                                    <!--OneTablePanel-->
+                                    <Grid Name="TransTabelPanel">
+                                        <Grid.RowDefinitions>
+                                            <RowDefinition Height="32"/>
+                                            <RowDefinition Height="5"/>
+                                            <RowDefinition Height="1*"/>
+                                        </Grid.RowDefinitions>
+
+                                        <StackPanel Orientation="Horizontal" Grid.Row="0">
+                                            <Label FontSize="15" FontFamily="Microsoft YaHei UI" Foreground="#FF8D8D8D" Margin="0" Cursor="Hand" MouseDown="AnyTransTableClick" ToolTip="在没有最终确认写入之前您可以修改翻译后的值">
+                                                当前字典
+                                            </Label>
+                                            <Label Name="TransLogCap" FontSize="15" FontFamily="Microsoft YaHei UI" Foreground="#FF8D8D8D" Margin="10 0 0 0" Cursor="Hand" MouseDown="AnyTransTableClick" ToolTip="查看当前实时状态">
+                                                实时信息
+                                            </Label>
+
+                                            <Border  CornerRadius="5" Background="#FFF789B2" Width="100" Height="29" Margin="20 0 10 0" PreviewMouseDown="ConfigBaiduYun" Cursor="Hand">
+                                                <Label Foreground="White" HorizontalAlignment="Center" VerticalAlignment="Center" ToolTip="配置百度云Api">
+                                                    配置百度云Api
+                                                </Label>
+                                            </Border>
+                                            
+                                            <Border  CornerRadius="5" Background="#FFF789B2" Width="80" Height="29" Margin="0 0 10 0" PreviewMouseDown="AutoHideHistoryToolView" Cursor="Hand">
+                                                <Label Foreground="White" HorizontalAlignment="Center" VerticalAlignment="Center" ToolTip="隐藏实时进度" Name="AutoHideHistoryToolViewBtn">
+                                                    显示浮动层
+                                                </Label>
+                                            </Border>
+
+                                            <Border  CornerRadius="5" Background="#FFF789B2" Width="80" Height="29" Margin="0 0 10 0" PreviewMouseDown="ShowEngineView" Cursor="Hand">
+                                                <Label Foreground="White" HorizontalAlignment="Center" VerticalAlignment="Center" ToolTip="隐藏实时进度" Name="EngineControl">
+                                                    调教引擎
+                                                </Label>
+                                            </Border>
+                                        </StackPanel>
+
+                                        <Canvas Grid.Row="1" Height="5">
+                                            <Grid Name="EffectBlock" Background="#FFFF93C9" Width="75" Height="2" Canvas.Left="0">
+                                            </Grid>
+                                        </Canvas>
+
+                                        <Grid Grid.Row="2" Margin="0 8 0 0" Visibility="Hidden" Name="WaitTransView">
+                                            <Grid.RowDefinitions>
+                                                <RowDefinition Height="30"/>
+                                                <RowDefinition Height="1*"/>
+                                            </Grid.RowDefinitions>
+                                            <Grid Background="#FFFFE1EF">
+                                                <Grid.ColumnDefinitions>
+                                                    <ColumnDefinition Width="45"/>
+                                                    <ColumnDefinition Width="1*"/>
+                                                    <ColumnDefinition Width="45"/>
+                                                    <ColumnDefinition Width="1*"/>
+                                                    <ColumnDefinition Width="45"/>
+                                                    <ColumnDefinition Width="1*"/>
+                                                    <ColumnDefinition Width="1*"/>
+                                                </Grid.ColumnDefinitions>
+
+                                                <Grid Background="#FFFF9CBC" Grid.Column="0">
+                                                    <Label VerticalAlignment="Center" FontSize="12" FontFamily="Microsoft YaHei UI" Foreground="White" HorizontalAlignment="Center">
+                                                        翻译前
+                                                    </Label>
+                                                </Grid>
+                                              
+                                                <TextBox BorderThickness="0" Margin="5 0 5 0" Height="30" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" FontSize="13" BorderBrush="#FFFF93C9" Padding="5 0 5 0" Grid.Column="1" Name="STransText">
+                                                    <TextBox.Resources>
+                                                        <VisualBrush x:Key="HintText" TileMode="None" Opacity="0.5" Stretch="None" AlignmentX="Left">
+                                                            <VisualBrush.Visual>
+                                                                <TextBlock  FontSize="12"  FontFamily="Microsoft YaHei UI" Text="查询翻译前字段"/>
+                                                            </VisualBrush.Visual>
+                                                        </VisualBrush>
+                                                    </TextBox.Resources>
+                                                    <TextBox.Style>
+                                                        <Style TargetType="TextBox">
+                                                            <Style.Triggers>
+                                                                <Trigger Property="Text" Value="{x:Null}">
+                                                                    <Setter Property="Background" Value="{StaticResource HintText}"/>
+                                                                </Trigger>
+                                                                <Trigger Property="Text" Value="">
+                                                                    <Setter Property="Background" Value="{StaticResource HintText}"/>
+                                                                </Trigger>
+                                                            </Style.Triggers>
+                                                        </Style>
+                                                    </TextBox.Style>
+                                                </TextBox>
+
+                                                <Grid Background="#FFFF9CBC" Grid.Column="2">
+                                                    <Label VerticalAlignment="Center" FontSize="12" FontFamily="Microsoft YaHei UI" Foreground="White" HorizontalAlignment="Center">
+                                                    翻译后
+                                                   </Label>
+                                                </Grid>
+                                                <TextBox BorderThickness="0" Margin="5 0 5 0" Height="30" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" FontSize="13" BorderBrush="#FFFF93C9" Padding="5 0 5 0" Grid.Column="3" Name="STransResult">
+                                                    <TextBox.Resources>
+                                                        <VisualBrush x:Key="HintText" TileMode="None" Opacity="0.5" Stretch="None" AlignmentX="Left">
+                                                            <VisualBrush.Visual>
+                                                                <TextBlock  FontSize="12"  FontFamily="Microsoft YaHei UI" Text="查询翻译后字段"/>
+                                                            </VisualBrush.Visual>
+                                                        </VisualBrush>
+                                                    </TextBox.Resources>
+                                                    <TextBox.Style>
+                                                        <Style TargetType="TextBox">
+                                                            <Style.Triggers>
+                                                                <Trigger Property="Text" Value="{x:Null}">
+                                                                    <Setter Property="Background" Value="{StaticResource HintText}"/>
+                                                                </Trigger>
+                                                                <Trigger Property="Text" Value="">
+                                                                    <Setter Property="Background" Value="{StaticResource HintText}"/>
+                                                                </Trigger>
+                                                            </Style.Triggers>
+                                                        </Style>
+                                                    </TextBox.Style>
+                                                </TextBox>
+
+                                                <Grid Background="#FFFF9CBC"  Grid.Column="4">
+                                                    <Label VerticalAlignment="Center" FontSize="12" FontFamily="Microsoft YaHei UI" Foreground="White" HorizontalAlignment="Center">
+                                                    按时间
+                                                   </Label>
+                                                </Grid>
+                                                <TextBox BorderThickness="0" Margin="5 0 5 0" Height="30" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" FontSize="13" BorderBrush="#FFFF93C9" Padding="5 0 5 0" Grid.Column="5" Name="STransDataTime">
+                                                    <TextBox.Resources>
+                                                        <VisualBrush x:Key="HintText" TileMode="None" Opacity="0.5" Stretch="None" AlignmentX="Left">
+                                                            <VisualBrush.Visual>
+                                                                <TextBlock  FontSize="12"  FontFamily="Microsoft YaHei UI" Text="查询时间格式(YYYY-MM-dd hh:mm:ss)"/>
+                                                            </VisualBrush.Visual>
+                                                        </VisualBrush>
+                                                    </TextBox.Resources>
+                                                    <TextBox.Style>
+                                                        <Style TargetType="TextBox">
+                                                            <Style.Triggers>
+                                                                <Trigger Property="Text" Value="{x:Null}">
+                                                                    <Setter Property="Background" Value="{StaticResource HintText}"/>
+                                                                </Trigger>
+                                                                <Trigger Property="Text" Value="">
+                                                                    <Setter Property="Background" Value="{StaticResource HintText}"/>
+                                                                </Trigger>
+                                                            </Style.Triggers>
+                                                        </Style>
+                                                    </TextBox.Style>
+                                                </TextBox>
+                                                
+                                                <StackPanel Orientation="Vertical" Grid.Column="7" VerticalAlignment="Center">
+                                                    <Border  CornerRadius="5" Background="#FF82AB" Width="50" Height="25" Margin="20 0 20 0" VerticalAlignment="Center">
+                                                        <Label Foreground="White" HorizontalAlignment="Center" VerticalAlignment="Center" Cursor="Hand" ToolTip="搜索待翻译字段" MouseDown="StartSearch">
+                                                            查询
+                                                        </Label>
+                                                    </Border>
+                                                </StackPanel>
+
+                                            </Grid>
+                                            <Grid Grid.Row="1">
+                                                <Grid.RowDefinitions>
+                                                    <RowDefinition Height="35"/>
+                                                    <RowDefinition Height="1*"/>
+                                                    <RowDefinition Height="50"/>
+                                                </Grid.RowDefinitions>
+
+                                                <Grid Name="WaitTransListCaption" Grid.Row="0" Background="#FFFCE3E3" PreviewMouseUp="WaitTransList_PreviewMouseUp">
+                                                    <Grid.ColumnDefinitions>
+                                                        <ColumnDefinition Width="130"/>
+                                                        <ColumnDefinition Width="100"/>
+                                                        <ColumnDefinition Width="1*"/>
+                                                        <ColumnDefinition Width="1*"/>
+                                                    </Grid.ColumnDefinitions>
+
+                                                    <Label Grid.Column="0" HorizontalAlignment="Center" VerticalAlignment="Center" FontWeight="Bold">
+                                                        Address
+                                                    </Label>
+
+                                                    <Label Grid.Column="1" HorizontalAlignment="Center" VerticalAlignment="Center" FontWeight="Bold">
+                                                        时间
+                                                    </Label>
+
+                                                    <Label Grid.Column="2" HorizontalAlignment="Center" VerticalAlignment="Center" FontWeight="Bold">
+                                                        翻译前
+                                                    </Label>
+
+                                                    <Label Grid.Column="3" HorizontalAlignment="Center" VerticalAlignment="Center" FontWeight="Bold">
+                                                        翻译后
+                                                    </Label>
+
+                                                    <GridSplitter HorizontalAlignment="Right" Height="10" Width="2" Background="Gray" Grid.Column="0"/>
+                                                    <GridSplitter HorizontalAlignment="Right" Height="10" Width="2" Background="Gray" Grid.Column="1"/>
+                                                    <GridSplitter HorizontalAlignment="Right" Height="10" Width="2" Background="Gray" Grid.Column="2"/>
+                                                </Grid>
+
+                                                <Grid Name="WaitTransList" Grid.Row="1">
+                                                </Grid>
+
+                                                <Grid Grid.Row="2">
+
+                                                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center">
+                                                        <Border CornerRadius="6,6,6,6" Background="#FFF77FAC" Margin="5" HorizontalAlignment="Right" Height="28" Width="50" Cursor="Hand">
+                                                            <Label  Foreground="White"  HorizontalContentAlignment="Center" VerticalContentAlignment="Center" FontSize="13" MouseDown="GotoIndex">
+                                                                |&lt;
+                                                            </Label>
+                                                        </Border>
+                                                        <Border CornerRadius="6,6,6,6" Background="#FFF77FAC" Margin="5" HorizontalAlignment="Right" Height="28" Width="90" Cursor="Hand">
+                                                            <Label  Foreground="White"  HorizontalContentAlignment="Center" VerticalContentAlignment="Center" FontSize="13" MouseDown="Previous">
+                                                                上一页
+                                                            </Label>
+                                                        </Border>
+                                                        <Label VerticalAlignment="Center" FontSize="20" Name="WaitTransListCap">
+
+                                                        </Label>
+                                                        <Border CornerRadius="6,6,6,6" Background="#FFF77FAC" Margin="5" HorizontalAlignment="Right" Height="28" Width="90" Cursor="Hand">
+                                                            <Label  Foreground="White"  HorizontalContentAlignment="Center" VerticalContentAlignment="Center" FontSize="13" MouseDown="Next">
+                                                                下一页
+                                                            </Label>
+                                                        </Border>
+                                                        <Border CornerRadius="6,6,6,6" Background="#FFF77FAC" Margin="5" HorizontalAlignment="Right" Height="28" Width="50" Cursor="Hand">
+                                                            <Label  Foreground="White"  HorizontalContentAlignment="Center" VerticalContentAlignment="Center" FontSize="13" MouseDown="GotoEnd">
+                                                                &gt;|
+                                                            </Label>
+                                                        </Border>
+                                                    </StackPanel>
+
+                                                </Grid>
+                                            </Grid>
+
+                                            <StackPanel Orientation="Vertical" Grid.Row="1">
+                                                <Grid Height="27">
+                                                    <Grid.ColumnDefinitions>
+                                                        <ColumnDefinition Width="1*"/>
+                                                        <ColumnDefinition Width="10"/>
+                                                        <ColumnDefinition Width="1*"/>
+                                                    </Grid.ColumnDefinitions>
+                                                </Grid>
+                                            </StackPanel>
+                                        </Grid>
+
+                                        <Grid Grid.Row="2" Margin="0 8 0 0" Visibility="Hidden" Name="TransLogView">
+                                            <TextBox IsReadOnly="True" TextWrapping="Wrap" AcceptsReturn="True" Name="TransLog" Background="{x:Null}" BorderBrush="{x:Null}" BorderThickness="0" FontSize="15"  FontFamily="Microsoft YaHei UI" Foreground="#FF8D8D8D" >
+                                            </TextBox>
+                                        </Grid>
+                                    </Grid>
+
+
+                                    <Canvas>
+                                    </Canvas>
+                                </Grid>
+
+                                <Grid Grid.Row="5">
+                                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Left" Margin="20 0 20 0">
+                                        <Ellipse Width="15" Height="15"  HorizontalAlignment="Center" Name="OneAction" Fill="#FFFF74C6">
+                                        </Ellipse>
+                                        <Label HorizontalAlignment="Center" VerticalAlignment="Center"  Name="OneActionMsg"  FontFamily="Microsoft YaHei UI" FontWeight="Bold"  Foreground="#FF636363" Opacity="0.85" FontSize="11">
+                                            Wait xTranslator Startup!
+                                        </Label>
+                                    </StackPanel>
+                                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" Margin="20 0 20 0">
+                                        <Label HorizontalAlignment="Center" VerticalAlignment="Center"  Name="CurrentData"  FontFamily="Microsoft YaHei UI" FontWeight="Bold"  Foreground="#FF636363" Opacity="0.85" FontSize="11">
+
+                                        </Label>
+                                    </StackPanel>
+                                </Grid>
+
+
+
+                            </Grid>
+
+
+                            <Grid Visibility="Hidden" Name="MoCoreView">
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="50"/>
+                                    <RowDefinition Height="65"/>
+                                    <RowDefinition Height="50"/>
+                                    <RowDefinition Height="1*"/>
+                                    <RowDefinition Height="30"/>
+                                </Grid.RowDefinitions>
+
+                                <Label VerticalAlignment="Center" FontSize="20" FontFamily="Microsoft YaHei UI" Foreground="#FF636363" Margin="20 0 0 0">
+                                    ModOrganizer - LisenerCore
+                                </Label>
+
+                                <Grid Grid.Row="1" Background="#FFF4F4F4">
+                                    <StackPanel Orientation="Horizontal" VerticalAlignment="Center" Margin="0 5 0 0">
+                                        
+                                        <Label Margin="20 0 0 0" FontFamily="Microsoft YaHei UI" FontWeight="Bold" FontSize="13" Foreground="#FFF789B2">
+                                            加载映像:
+                                        </Label>
+
+                                        <ComboBox Name="ModLoaders" VerticalContentAlignment="Center" Style="{StaticResource WpfComboBoxStyle}" Width="150" Margin="0 -5 0 0" Panel.ZIndex="999" SelectionChanged="ModSelectChange">
+                                        </ComboBox>
+
+                                        <Border  CornerRadius="5" Background="#FFF789B2" Width="100" Height="35" Margin="20 -5 10 0" PreviewMouseDown="ClearOverWrite">
+                                            <Label Foreground="White" HorizontalAlignment="Center" VerticalAlignment="Center" Cursor="Hand" ToolTip="定位到游戏路径">
+                                              清理OverWrite
+                                            </Label>
+                                        </Border>
+
+                                    </StackPanel>
+                                </Grid>
+
+                                <Grid Grid.Row="2">
+                                    <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
+                                        <Label Margin="20 0 0 0" FontFamily="Microsoft YaHei UI" FontWeight="Bold" FontSize="13" Foreground="#FF636363" Name="InstallModCount">
+                                           已安装:
+                                        </Label>
+                                        <Label Margin="20 0 0 0" FontFamily="Microsoft YaHei UI" FontWeight="Bold" FontSize="13" Foreground="#FF636363" Name="EnableModCount">
+                                           已启用:
+                                        </Label>
+                                        <Label Margin="20 0 0 0" FontFamily="Microsoft YaHei UI" FontWeight="Bold" FontSize="13" Foreground="#FF636363" Name="DisableModCount">
+                                           已停用:
+                                        </Label>
+
+                                        <Border  CornerRadius="5" Background="#FFF789B2" Width="100" Height="30" Margin="20 -5 10 0">
+                                            <Label Foreground="White" HorizontalAlignment="Center" VerticalAlignment="Center" Cursor="Hand" ToolTip="定位到游戏路径" MouseDown="AutoShowLocation">
+                                                SkyrimPath
+                                            </Label>
+                                        </Border>
+
+                                        <Border  CornerRadius="5" Background="#FFF789B2" Width="100" Height="30" Margin="0 -5 10 0">
+                                            <Label Foreground="White" HorizontalAlignment="Center" VerticalAlignment="Center" Cursor="Hand" ToolTip="定位到Mo2路径" MouseDown="AutoShowLocation">
+                                                Mo2Path
+                                            </Label>
+                                        </Border>
+
+                                        <Border  CornerRadius="5" Background="#FFF789B2" Width="100" Height="30" Margin="0 -5 10 0">
+                                            <Label Foreground="White" HorizontalAlignment="Center" VerticalAlignment="Center" Cursor="Hand" ToolTip="定位到Mod路径" MouseDown="AutoShowLocation">
+                                                ModPath
+                                            </Label>
+                                        </Border>
+                                    </StackPanel>
+                                </Grid>
+                                
+                                <Grid Grid.Row="3" Margin="20 0 20 0">
+                                    <!--OneTablePanel-->
+                                    <Grid Name="ModTablePanel">
+                                        <Grid.RowDefinitions>
+                                            <RowDefinition Height="32"/>
+                                            <RowDefinition Height="5"/>
+                                            <RowDefinition Height="1*"/>
+                                        </Grid.RowDefinitions>
+
+                                        <StackPanel Orientation="Horizontal" Grid.Row="0">
+                                            <Label FontSize="15" FontFamily="Microsoft YaHei UI" Foreground="#FF8D8D8D" Margin="0" Cursor="Hand" ToolTip="前置工具检测" PreviewMouseDown="AnyModTableClick">
+                                                前置检测
+                                            </Label>
+                                            <Label FontSize="15" FontFamily="Microsoft YaHei UI" Foreground="#FF8D8D8D" Margin="10 0 0 0" Cursor="Hand" ToolTip="查看游戏加载记录" PreviewMouseDown="AnyModTableClick">
+                                                游戏执行记录
+                                            </Label>
+                                            <Label FontSize="15" FontFamily="Microsoft YaHei UI" Foreground="#FF8D8D8D" Margin="10 0 0 0" Cursor="Hand" ToolTip="开始备份Mod" PreviewMouseDown="AnyModTableClick">
+                                                备份Mod
+                                            </Label>
+                                        </StackPanel>
+
+                                        <Canvas Grid.Row="1" Height="5">
+                                            <Grid Name="EffectBlockA" Background="#FFFF93C9" Width="75" Height="2" Canvas.Left="0">
+                                            </Grid>
+                                        </Canvas>
+
+                                        <Grid Grid.Row="2" Name="CheckINeed">
+                                            <Grid.RowDefinitions>
+                                                <RowDefinition Height="1*"/>
+                                                <RowDefinition Height="30"/>
+                                            </Grid.RowDefinitions>
+                                            <ListBox FontSize="13" FontFamily="Microsoft YaHei UI" Foreground="#FF5F5F5F" Margin="0 5 0 0" Name="ModMsgView" SelectionChanged="SelectModMsgChange" BorderThickness="0" BorderBrush="{x:Null}">
+                                            </ListBox>
+                                            <TextBox Name="SelectValue" Grid.Row="1" BorderThickness="0" BorderBrush="{x:Null}" VerticalContentAlignment="Center" SelectionBrush="#FFFF52A8">
+                                            </TextBox>
+                                        </Grid>
+
+                                        <Grid Grid.Row="3" Name="CheckMod" Visibility="Hidden">
+                                            <Grid.RowDefinitions>
+                                                <RowDefinition Height="25"/>
+                                                <RowDefinition Height="25"/>
+                                                <RowDefinition Height="1*"/>
+                                            </Grid.RowDefinitions>
+                                            <Grid Grid.Row="0">
+                                                <StackPanel Orientation="Horizontal">
+                                                    <Label>
+                                                        工作进度:
+                                                    </Label>
+                                                    <ProgressBar  Width="350" BorderBrush="{x:Null}" BorderThickness="0"  Background="#FFFF93C9"   Minimum="0" Height="20" Name="CheckModPercent">
+                                                    </ProgressBar>
+
+                                                    <Label>
+                                                        正在验证:
+                                                    </Label>
+
+                                                    <Label Name="CurrentPath">
+
+                                                    </Label>
+                                                </StackPanel>
+                                            </Grid>
+
+                                            <Grid Grid.Row="1">
+                                                <StackPanel Orientation="Horizontal">
+                                                    <Label>
+                                                        扫描路径:
+                                                    </Label>
+                                                    <Label Name="BSourcePath">
+                                                    </Label>
+                                                    <Label>
+                                                        备份路径:
+                                                    </Label>
+                                                    <Label Name="BTargetPath">
+                                                    </Label>
+                                                </StackPanel>
+                                            </Grid>
+
+                                            <TextBox Name="CheckMsg" Grid.Row="2" AcceptsReturn="True" TextWrapping="Wrap" Background="{x:Null}" BorderBrush="{x:Null}" BorderThickness="0" FontSize="13">
+                                            </TextBox>
+                                        </Grid>
+
+                                    </Grid>
+
+                                  
+
+                                    <Canvas>
+                                    </Canvas>
+                                </Grid>
+
+
+
+                            </Grid>
+
+
+
+                            <Grid Visibility="Hidden" Name="SettingView">
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="50"/>
+                                    <RowDefinition Height="1*"/>
+                                    <RowDefinition Height="30"/>
+                                </Grid.RowDefinitions>
+
+                                <Label VerticalAlignment="Center" FontSize="20" FontFamily="Microsoft YaHei UI" Foreground="#FF636363" Margin="20 0 0 0">
+                                    GlobalSetting
+                                </Label>
+
+                                <StackPanel Orientation="Vertical" Grid.Row="1" Margin="25">
+                                    <StackPanel Orientation="Horizontal">
+                                        <Label>
+                                            是否播放选中音效:
+                                        </Label>
+                                        <CheckBox Name="PlaySound" HorizontalAlignment="Center" VerticalAlignment="Center" Click="PlaySound_Click" Grid.Row="1" >
+                                            是否播放选中音效
+                                        </CheckBox>
+                                    </StackPanel>
+
+                                    <StackPanel Orientation="Horizontal" Margin="0 5 0 0">
+                                        <Label>
+                                            ModOrganizer 路径:
+                                        </Label>
+
+                                        <TextBox Name="ModOrganizerPath" Width="350" VerticalContentAlignment="Center" TextChanged="ModOrganizerPath_TextChanged">
+                                        </TextBox>
+
+                                        <Border  CornerRadius="5" Background="#FFF789B2" Width="100" Height="30" Margin="5 0 5 0" PreviewMouseDown="ShowMo2Select">
+                                            <Label Foreground="White" HorizontalAlignment="Center" VerticalAlignment="Center" Cursor="Hand" ToolTip="选择ModOrganizer所在文件路径">
+                                                选择Mo2目录
+                                            </Label>
+                                        </Border>
+                                    </StackPanel>
+
+                                    <StackPanel Orientation="Horizontal" Margin="0 5 0 0">
+                                        <Label>
+                                            Mod备份路径:
+                                        </Label>
+
+                                        <TextBox Name="BackUpPath" Width="350" VerticalContentAlignment="Center" TextChanged="BackUpPath_TextChanged">
+                                        </TextBox>
+
+                                        <Border  CornerRadius="5" Background="#FFF789B2" Width="100" Height="30" Margin="5 0 5 0" PreviewMouseDown="ShowBackUpPathSelect">
+                                            <Label Foreground="White" HorizontalAlignment="Center" VerticalAlignment="Center" Cursor="Hand" ToolTip="用来保证异常情况下回档">
+                                                选择备份目录
+                                            </Label>
+                                        </Border>
+                                    </StackPanel>
+                                </StackPanel>
+                              
+                            </Grid>
+                        </Grid>
+                    </Grid>
+
+                </Grid>
+            </Grid>
+        </Border>
+
+    </Border>
+</Window>

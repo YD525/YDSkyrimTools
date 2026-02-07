@@ -1,0 +1,154 @@
+﻿<Window x:Class="YDSkyrimTools.EngineVisualView"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:YDSkyrimTools"
+        mc:Ignorable="d"
+        Title="EngineVisualView" Height="670" Width="800" Loaded="Window_Loaded" WindowStartupLocation="CenterScreen" Topmost="True">
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="1*"/>
+            <ColumnDefinition Width="230"/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="1*"/>
+        </Grid.RowDefinitions>
+        <Grid Grid.Row="0">
+            <StackPanel Orientation="Vertical" HorizontalAlignment="Center" VerticalAlignment="Top" Margin="0 5 0 0">
+
+                <Label Foreground="Red">
+                    支持修正的引擎 连词 词组 (请确保所有引擎处于打开状态!!!)
+                </Label>
+                <StackPanel Orientation="Horizontal">
+                    <Label FontSize="15"  FontFamily="Microsoft YaHei UI" VerticalContentAlignment="Center">
+                        搜索任意要翻译的内容
+                    </Label>
+                    <TextBox Name="TransTarget" Height="50" Width="330" TextWrapping="Wrap" AcceptsReturn="True" FontSize="13" FontWeight="Bold">
+                    </TextBox>
+                    <Border  CornerRadius="5" Background="#FFF789B2" Padding="5 0 5 0" Cursor="Hand"  Margin="5 0 0 0" PreviewMouseDown="SearchTarget" Height="35">
+                        <Label Foreground="White" HorizontalAlignment="Center" VerticalAlignment="Center" ToolTip="追加内容">
+                           查询
+                        </Label>
+                    </Border>
+                </StackPanel>
+
+                <StackPanel Orientation="Horizontal" Margin="0 5 0 5">
+                    <Label FontSize="15"  FontFamily="Microsoft YaHei UI">
+                        结果值
+                    </Label>
+                    <TextBox Name="ResultTarget" Width="350" VerticalContentAlignment="Center" HorizontalContentAlignment="Center"  TextWrapping="Wrap" AcceptsReturn="True" FontSize="13" Height="50">
+                    </TextBox>
+                </StackPanel>
+
+                <StackPanel Orientation="Horizontal">
+                    <Label>
+                        词组引擎结果
+                    </Label>
+                </StackPanel>
+
+                <StackPanel Orientation="Vertical">
+
+                    <ListBox Name="Languages" Height="100" Margin="5">
+                    </ListBox>
+
+                    <StackPanel Orientation="Horizontal" Margin="0 5 0 5">
+                        <Border  CornerRadius="5" Background="#FFF789B2" Width="80" Height="29" Cursor="Hand" PreviewMouseDown="AddLanguages">
+                            <Label Foreground="White" HorizontalAlignment="Center" VerticalAlignment="Center" ToolTip="追加内容">
+                                添加
+                            </Label>
+                        </Border>
+                        <Border  CornerRadius="5" Background="#FFF789B2" Width="80" Height="29" Margin="5 0 0 0"  Cursor="Hand" PreviewMouseDown="DeleteSelectLanguage">
+                            <Label Foreground="White" HorizontalAlignment="Center" VerticalAlignment="Center" ToolTip="移除内容">
+                                删除
+                            </Label>
+                        </Border>
+                    </StackPanel>
+
+                </StackPanel>
+
+                <StackPanel Orientation="Horizontal">
+                    <Label>
+                        连词引擎结果
+                    </Label>
+                </StackPanel>
+
+                <StackPanel Orientation="Vertical">
+
+                    <ListBox Name="Conjunctions" Height="100" Margin="5">
+                    </ListBox>
+                    
+                    <StackPanel Orientation="Horizontal" Margin="0 5 0 5">
+                        <Border  CornerRadius="5" Background="#FFF789B2" Width="80" Height="29" Cursor="Hand" PreviewMouseDown="AddConjunction">
+                            <Label Foreground="White" HorizontalAlignment="Center" VerticalAlignment="Center" ToolTip="追加内容">
+                                添加
+                            </Label>
+                        </Border>
+                        <Border  CornerRadius="5" Background="#FFF789B2" Width="80" Height="29" Margin="5 0 0 0"  Cursor="Hand"  PreviewMouseDown="DeleteSelectConjunction">
+                            <Label Foreground="White" HorizontalAlignment="Center" VerticalAlignment="Center" ToolTip="移除内容">
+                                删除
+                            </Label>
+                        </Border>
+                    </StackPanel>
+                    
+                </StackPanel>
+
+                <StackPanel Orientation="Horizontal">
+                    <Label>
+                        云引擎结果
+                    </Label>
+                </StackPanel>
+
+                <StackPanel Orientation="Vertical">
+
+                    <ListBox Name="YunTrans" Height="100" Margin="5">
+                    </ListBox>
+
+                   
+
+                </StackPanel>
+
+            </StackPanel>
+        </Grid>
+        <Grid Grid.Column="1">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="35"/>
+                <RowDefinition Height="1*"/>
+            </Grid.RowDefinitions>
+
+            <StackPanel Orientation="Horizontal">
+
+                <Label VerticalAlignment="Center">
+                    自定义引擎-临时(重启软件即失效)
+                </Label>
+
+
+
+            </StackPanel>
+
+            <StackPanel Orientation="Vertical" Grid.Row="1" Margin="0 0 10 0">
+
+                <ListBox Name="TranslateCaches" Height="500" Margin="5">
+                </ListBox>
+
+                <StackPanel Orientation="Horizontal" Margin="0 5 0 5">
+                    <Border  CornerRadius="5" Background="#FFF789B2" Width="80" Height="29"  Cursor="Hand" PreviewMouseDown="AddAny">
+                        <Label Foreground="White" HorizontalAlignment="Center" VerticalAlignment="Center" ToolTip="追加内容">
+                            添加
+                        </Label>
+                    </Border>
+                    <Border  CornerRadius="5" Background="#FFF789B2" Width="80" Height="29" Margin="5 0 0 0"  Cursor="Hand" PreviewMouseDown="DeleteCache" >
+                        <Label Foreground="White" HorizontalAlignment="Center" VerticalAlignment="Center" ToolTip="移除内容">
+                            删除
+                        </Label>
+                    </Border>
+                </StackPanel>
+               
+            </StackPanel>
+
+
+
+        </Grid>
+
+    </Grid>
+</Window>
